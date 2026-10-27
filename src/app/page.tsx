@@ -1,69 +1,237 @@
+import Link from "next/link";
 import Image from "next/image";
-
-export default function Home() {
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Check,
+  Sparkles,
+  Smartphone,
+  Watch,
+  Glasses,
+  Headphones,
+} from "lucide-react";
+import { getProducts } from "@/lib/shop";
+import { FeaturedProducts } from "@/components/featured-products";
+export const dynamic = "force-dynamic";
+const collectionCards = [
+  {
+    name: "Mobiles",
+    sub: "Your world. Upgraded.",
+    icon: Smartphone,
+    image: "photo-1592750475338-74b7b21085ab",
+    className: "cat-mobile",
+  },
+  {
+    name: "Watches",
+    sub: "Make every moment count.",
+    icon: Watch,
+    image: "photo-1524805444758-089113d48a6d",
+    className: "cat-watch",
+  },
+  {
+    name: "Eyewear",
+    sub: "See things differently.",
+    icon: Glasses,
+    image: "photo-1572635196237-14b3f281503f",
+    className: "cat-eyewear",
+  },
+  {
+    name: "Accessories",
+    sub: "The little things, sorted.",
+    icon: Headphones,
+    image: "photo-1606220945770-b5b6c2c55bf1",
+    className: "cat-accessories",
+  },
+];
+export default async function Home() {
+  const products = await getProducts();
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <main>
+      <section className="hero-section">
+        <div className="container hero-grid">
+          <div className="hero-copy">
+            <div className="hero-eyebrow">
+              <span /> THE EVERYDAY, ELEVATED
+            </div>
+            <h1>
+              Good taste.
+              <br />
+              Great <em>choices.</em>
+            </h1>
+            <p>
+              From the phone in your pocket to the watch on your wrist. Discover
+              little upgrades that make your everyday feel extraordinary.
+            </p>
+            <div className="hero-buttons">
+              <Link href="/shop" className="btn btn-dark">
+                Explore the collection <ArrowUpRight size={18} />
+              </Link>
+              <Link href="/shop?sort=newest" className="text-link">
+                What’s new <ArrowRight size={17} />
+              </Link>
+            </div>
+            <div className="hero-assurance">
+              <span>
+                <Check size={14} /> Carefully selected
+              </span>
+              <span>
+                <Check size={14} /> Fairly priced
+              </span>
+              <span>
+                <Check size={14} /> Delivered with care
+              </span>
+            </div>
+            <div className="hero-index">
+              <span>01 / THE NEW EVERYDAY</span>
+              <a href="#collections" aria-label="Explore categories">
+                <ArrowDown size={17} />
+              </a>
+            </div>
+          </div>
+          <div className="hero-visual">
             <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+              src="https://images.unsplash.com/photo-1695048133142-1a20484d2569?auto=format&fit=crop&w=1400&q=90"
+              alt="Titanium iPhone Pro, part of the Al Makkah mobile collection"
+              fill
+              priority
+              unoptimized
+              sizes="(max-width: 800px) 100vw, 50vw"
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+            <div className="hero-photo-shade" />
+            <span className="hero-image-label">
+              <Sparkles size={13} /> THE POCKET-SIZED UPGRADE
+            </span>
+            <div className="hero-product-note">
+              <div>
+                <small>MEET YOUR NEXT FAVORITE</small>
+                <strong>The mobile collection</strong>
+                <span>Built for everything you do.</span>
+              </div>
+              <Link href="/shop?category=Mobiles" aria-label="Shop mobiles">
+                <ArrowUpRight size={24} />
+              </Link>
+            </div>
+            <span className="hero-side-text">AL MAKKAH / CURATED FOR YOU</span>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+      <div className="brand-ticker">
+        <div className="container">
+          <span>THE BRANDS YOU KNOW. THE CHOICES YOU’LL LOVE.</span>
+          <b>Apple</b>
+          <b>SAMSUNG</b>
+          <b className="ticker-serif">Everyday classics</b>
+          <b>Sound & style</b>
+          <Sparkles size={18} />
+          <b className="ticker-serif">Your next favorite</b>
+        </div>
+      </div>
+      <section className="section container" id="collections">
+        <div className="section-heading">
+          <div>
+            <span className="eyebrow">A LITTLE SOMETHING FOR EVERY YOU</span>
+            <h2>Find your everyday.</h2>
+          </div>
+          <Link href="/shop" className="text-link">
+            Browse everything <ArrowUpRight size={17} />
+          </Link>
+        </div>
+        <div className="category-grid">
+          {collectionCards.map(
+            ({ name, sub, icon: Icon, image, className }) => (
+              <Link
+                className={`category-card ${className}`}
+                href={`/shop?category=${name}`}
+                key={name}
+              >
+                <div className="category-card-top">
+                  <Icon size={19} strokeWidth={1.5} />
+                  <span>
+                    {String(
+                      products.filter((p) => p.category === name).length,
+                    ).padStart(2, "0")}{" "}
+                    PICKS
+                  </span>
+                </div>
+                <div className="category-image">
+                  <Image
+                    src={`https://images.unsplash.com/${image}?auto=format&fit=crop&w=650&q=80`}
+                    alt={`${name} collection`}
+                    fill
+                    unoptimized
+                    sizes="(max-width: 600px) 50vw, 25vw"
+                  />
+                </div>
+                <div className="category-card-bottom">
+                  <div>
+                    <h3>{name}</h3>
+                    <p>{sub}</p>
+                  </div>
+                  <span>
+                    <ArrowUpRight size={19} />
+                  </span>
+                </div>
+              </Link>
+            ),
+          )}
+        </div>
+      </section>
+      <section className="featured-section">
+        <div className="container section">
+          <FeaturedProducts products={products} />
+        </div>
+      </section>
+      <section className="container lifestyle-section">
+        <div className="lifestyle-image">
+          <Image
+            src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1200&q=85"
+            alt="A minimal everyday watch"
+            fill
+            unoptimized
+            sizes="(max-width: 800px) 100vw, 50vw"
+          />
+          <span className="image-caption">THE ART OF KEEPING IT SIMPLE.</span>
+        </div>
+        <div className="lifestyle-copy">
+          <span className="eyebrow">MORE THAN THE TIME</span>
+          <h2>
+            A good watch.
+            <br />A great <em>impression.</em>
+          </h2>
+          <p>
+            Some things never go out of style. Find a watch that feels like you,
+            from clean everyday classics to something a little more bold.
+          </p>
+          <Link href="/shop?category=Watches" className="btn btn-dark">
+            Find your perfect watch <ArrowUpRight size={18} />
+          </Link>
+          <span className="lifestyle-footnote">
+            THOUGHTFULLY PICKED. EASY TO LOVE.
+          </span>
+        </div>
+      </section>
+      <section className="about-banner container">
+        <div>
+          <span className="eyebrow">HELLO, WE’RE AL MAKKAH.</span>
+          <h2>
+            Your neighborhood shop.
+            <br />
+            <em>Now, wherever you are.</em>
+          </h2>
+        </div>
+        <div>
+          <p>
+            We believe the things you use every day should bring you a little
+            joy. That’s why we bring mobiles, watches, eyewear and accessories
+            together in one place, with straightforward prices and personal
+            service.
+          </p>
+          <Link href="/information" className="text-link">
+            A little more about us <ArrowUpRight size={17} />
+          </Link>
+        </div>
+      </section>
+    </main>
   );
 }
